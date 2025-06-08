@@ -15,7 +15,7 @@ FractalSelector::FractalSelector()
     // Добавьте другие фракталы здесь
 
     // Загрузка шрифта
-    if (!font.loadFromFile("../fonts/Noto_Sans_JP/NotoSansJP-VariableFont_wght.ttf")) {
+    if (!font.loadFromFile("./fonts/NotoSansJP-VariableFont_wght.ttf")) {
         // Обработка ошибки загрузки шрифта
     }
 

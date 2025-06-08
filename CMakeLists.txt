@@ -11,9 +11,10 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 #Путь до локального SFML
 if(LINUX)
     include_directories(${PROJECT_SOURCE_DIR}/lib/SFML_linux/include)
+elseif(APPLE)
+    include_directories(${PROJECT_SOURCE_DIR}/lib/SFML_mac/include)
 endif()
-# Добавляем исполняемый файл
-#add_executable(FractalsApp src/FractalsApp.cpp)
+
 
 # Добавляем остальные исходные файлы
 set(SOURCES
@@ -36,13 +37,20 @@ add_executable(FractalsApp ${SOURCES})
 if(LINUX)
     set(SFML_DIR ${PROJECT_SOURCE_DIR}/lib/SFML_linux/lib/cmake/SFML)
     set(CMAKE_INSTALL_RPATH ${PROJECT_SOURCE_DIR}/lib/SFML_linux/lib)
+elseif(APPLE)
+    # set(SFML_DIR ${PROJECT_SOURCE_DIR}/lib/SFML_mac/lib/cmake/SFML)  # путь к cmake-модулю SFML
+    set(SFML_DIR /opt/homebrew/Cellar/sfml@2/2.6.2_1/lib/cmake/SFML)
+    set(CMAKE_INSTALL_RPATH ${PROJECT_SOURCE_DIR}/lib/SFML_mac/extlibs)
+    # set(FRAMEWORK_DIR ${PROJECT_SOURCE_DIR}/lib/SFML_mac/Frameworks)
 endif()
+
 
 # Находим и подключаем SFML
 find_package(SFML 2.6 COMPONENTS system window graphics network audio REQUIRED)
 target_link_libraries(FractalsApp sfml-system sfml-window sfml-graphics sfml-network sfml-audio)
 
 # Добавляем поддиректорию для тестов
-#add_subdirectory(tests)
+file(MAKE_DIRECTORY fonts)
+file(COPY ./fonts/Noto_Sans_JP/NotoSansJP-VariableFont_wght.ttf DESTINATION ${CMAKE_BINARY_DIR}/fonts)
 
 
