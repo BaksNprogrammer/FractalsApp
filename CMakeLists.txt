@@ -4,9 +4,14 @@ project(FractalsApp)
 # Указываем стандарт C++
 set(CMAKE_CXX_STANDARD 14)
 
+
 # Указываем, где искать заголовочные файлы
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
+#Путь до локального SFML
+if(LINUX)
+    include_directories(${PROJECT_SOURCE_DIR}/lib/SFML_linux/include)
+endif()
 # Добавляем исполняемый файл
 #add_executable(FractalsApp src/FractalsApp.cpp)
 
@@ -27,8 +32,14 @@ set(SOURCES
 
 add_executable(FractalsApp ${SOURCES})
 
+#Пути до динамически бибилиотек
+if(LINUX)
+    set(SFML_DIR ${PROJECT_SOURCE_DIR}/lib/SFML_linux/lib/cmake/SFML)
+    set(CMAKE_INSTALL_RPATH ${PROJECT_SOURCE_DIR}/lib/SFML_linux/lib)
+endif()
+
 # Находим и подключаем SFML
-find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
+find_package(SFML 2.6 COMPONENTS system window graphics network audio REQUIRED)
 target_link_libraries(FractalsApp sfml-system sfml-window sfml-graphics sfml-network sfml-audio)
 
 # Добавляем поддиректорию для тестов
