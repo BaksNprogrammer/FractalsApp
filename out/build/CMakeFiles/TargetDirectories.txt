@@ -1,3 +1,0 @@
-/home/haker/FractalsApp/out/build/CMakeFiles/FractalsApp.dir
-/home/haker/FractalsApp/out/build/CMakeFiles/edit_cache.dir
-/home/haker/FractalsApp/out/build/CMakeFiles/rebuild_cache.dir
